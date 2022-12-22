@@ -3,7 +3,7 @@ POST http://localhost:8000/api/v1/user
 Content-Type: application/json
 
 {
-    "name":"Rosshan",
-    "email":"Rodshddan@gmail.com",
+    "name":"Rosfshan",
+    "email":"Rodddsfhddan@gmail.com",
     "pin":"1234"
 }
