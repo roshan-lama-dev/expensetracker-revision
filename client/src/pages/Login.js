@@ -1,10 +1,25 @@
 import React from "react";
 import { MainLayout } from "../components/mainLayout/MainLayout";
 import Container from "react-bootstrap/esm/Container";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-
+import { Form, Button } from "react-bootstrap";
+import { CustomField } from "../components/mainLayout/customField/CustomField";
+// import { Button } from "bootstrap";
 const Login = () => {
+  const fields = [
+    {
+      label: "Email Address",
+      placeholder: "Enter your email",
+      name: "name",
+      required: true,
+    },
+    {
+      label: "Password",
+      placeholder: "Enter your Password",
+      name: "password",
+      required: true,
+      type: "password",
+    },
+  ];
   return (
     <MainLayout>
       <Container className="mt-5">
@@ -15,20 +30,11 @@ const Login = () => {
           </div>
           <div className="col m-1">
             <Form>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-              </Form.Group>
+              {fields.map((item, index) => (
+                <CustomField {...item} />
+              ))}
               <Button variant="primary" type="submit">
-                Submit
+                LOGIN
               </Button>
             </Form>
           </div>
