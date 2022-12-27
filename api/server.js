@@ -5,6 +5,9 @@ const PORT = process.env.PORT || 8000;
 import cors from "cors";
 import morgan from "morgan";
 import userRouter from "./src/routers/userRouter.js";
+import transactionRouter from "./src/routers/transactionRouter.js";
+import { userAuth } from "./src/middleware/authMiddleware.js";
+
 // importing middleware
 app.use(express.json());
 app.use(cors());
@@ -15,6 +18,8 @@ connectMongo();
 
 //create a url endpoint and reroute the request made to userRouter
 app.use("/api/v1/user", userRouter);
+
+app.use("/api/v1/transaction", userAuth, transactionRouter);
 
 // catch the bad url
 app.use("*", (req, res, next) => {

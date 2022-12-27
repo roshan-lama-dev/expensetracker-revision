@@ -7,3 +7,12 @@ Content-Type: application/json
     "email":"Rodddsfhddddan@gmail.com",
     "pin":"1234"
 }
+### Create new transaction
+POST http://localhost:8000/api/v1/transaction
+Content-Type: application/json
+Authorization: 63aa7fb60b960d9e06bc6e21
+
+{
+    "type":"Rosfshan",
+    "name":"Rodddsfhddddan@gmail.com",
+    "amount":"1234"}
