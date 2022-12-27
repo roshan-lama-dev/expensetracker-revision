@@ -11,7 +11,6 @@ export const Header = () => {
     const str = sessionStorage.getItem("user");
     if (str) {
       setUser(JSON.parse(str));
-      console.log(user);
     }
   }, []);
   const handelLogOut = () => {

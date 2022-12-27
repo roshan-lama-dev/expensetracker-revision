@@ -58,6 +58,7 @@ const Register = () => {
     const { confirmPin, ...rest } = form;
     if (confirmPin !== rest.pin) {
       toast.error("The pin must match");
+      return;
     }
 
     const { status, message } = await postUser(form);

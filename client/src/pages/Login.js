@@ -35,7 +35,6 @@ const Login = () => {
       navigate("/dashboard");
     }
     resilt = sessionStorage.getItem("user");
-    console.log(resilt);
   };
 
   const fields = [
