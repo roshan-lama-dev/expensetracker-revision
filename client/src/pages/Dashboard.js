@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
+import { CustomForm } from "../components/mainLayout/customForm/CustomForm";
 import { CustomTable } from "../components/mainLayout/customTable/CustomTable";
 import { MainLayout } from "../components/mainLayout/MainLayout";
 import { fetchTransaction } from "../helpers/axiosHelper";
@@ -28,6 +29,9 @@ const Dashboard = () => {
         Welcome {loginUser.name}
         {/* formsection */}
         {/* table section */}
+        <div className="form">
+          <CustomForm />
+        </div>
         <div className="table">
           <CustomTable transaction={transaction} />
         </div>
