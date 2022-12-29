@@ -30,7 +30,7 @@ const Dashboard = () => {
         {/* formsection */}
         {/* table section */}
         <div className="form m-3">
-          <CustomForm />
+          <CustomForm fetchingTransaction={fetchingTransaction} />
         </div>
         <div className="table">
           <CustomTable transaction={transaction} />

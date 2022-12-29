@@ -68,3 +68,27 @@ export const fetchTransaction = async () => {
     };
   }
 };
+
+export const postTransction = async (formdata) => {
+  const userId = getUserId();
+  if (!userId) {
+    return {
+      status: "error",
+      message: "Please log in to post the transactions",
+    };
+  }
+  try {
+    const { data } = await axios.post(transactionApi, formdata, {
+      headers: {
+        Authorization: userId,
+      },
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
