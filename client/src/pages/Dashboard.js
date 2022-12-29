@@ -26,10 +26,10 @@ const Dashboard = () => {
   return (
     <MainLayout>
       <Container className="mt-5 ">
-        Welcome {loginUser.name}
+        <div className="welcome pl-4 text-bold">Welcome {loginUser.name}</div>
         {/* formsection */}
         {/* table section */}
-        <div className="form">
+        <div className="form m-3">
           <CustomForm />
         </div>
         <div className="table">

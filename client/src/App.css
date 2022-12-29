@@ -1,3 +1,9 @@
 .main {
   min-height: 80vh;
 }
+
+.welcome {
+  font-style: bold;
+  color: red;
+  text-decoration: aliceblue;
+}
