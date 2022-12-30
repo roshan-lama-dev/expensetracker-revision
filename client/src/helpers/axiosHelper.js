@@ -92,3 +92,28 @@ export const postTransction = async (formdata) => {
     };
   }
 };
+
+export const deleteTransaction = async (ids) => {
+  const userId = getUserId();
+  if (!userId) {
+    return {
+      status: "error",
+      message: "Please log in to see the transaction",
+    };
+  }
+  try {
+    const { data } = await axios.delete(transactionApi, {
+      data: ids,
+      headers: {
+        Authorization: userId,
+      },
+    });
+    console.log(data);
+    return data;
+  } catch (error) {
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
