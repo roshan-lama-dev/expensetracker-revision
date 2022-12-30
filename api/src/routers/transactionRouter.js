@@ -2,6 +2,7 @@ import express from "express";
 import { emitWarning } from "process";
 import {
   createTransaction,
+  deleteTransactionByIds,
   getUserTransactionById,
 } from "../models/transactionModel/TransactionModel.js";
 
@@ -68,12 +69,35 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     // auth headers
-    const result = await getUserTransactionById();
+    const { authorization } = req.headers;
+    console.log(req.headers.authorization);
+    // we are passing teh loggedUserId as the filter to get the records belonging to the user
+    const result = await getUserTransactionById({ userId: authorization });
     console.log(result);
-
+    // we dont check the result contains the id or not because we the data stored is quite different
     res.json({
       status: "success",
       message: "The new user transaction has been added",
+      result,
+    });
+  } catch (error) {
+    // next(error);
+    // WE will catch the error and do the handling here
+
+    next(error);
+  }
+});
+router.delete("/", async (req, res, next) => {
+  try {
+    // auth headers
+
+    // we are passing teh loggedUserId as the filter to get the records belonging to the user
+    const result = await deleteTransactionByIds(req.body);
+    console.log(result);
+    // we dont check the result contains the id or not because we the data stored is quite different
+    res.json({
+      status: "success",
+      message: "The new user transaction has been deleted",
       result,
     });
   } catch (error) {
