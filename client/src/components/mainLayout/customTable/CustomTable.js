@@ -1,18 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
+import { toast } from "react-toastify";
 import { deleteTransaction } from "../../../helpers/axiosHelper";
 
-export const CustomTable = ({ transaction }) => {
+export const CustomTable = ({ transaction, fetchingTransaction }) => {
+  const [checkState, setCheckState] = useState(false);
   const [itemToDelete, setItemToDelete] = useState([]);
+
+  const [bg, setBg] = useState("success");
+
+  useEffect(() => {
+    checkTotalExpense();
+  }, []);
 
   const handleOnSelect = (e) => {
     const { checked, value } = e.target;
-    // console.log(checked, value);
+    console.log(checked, value);
+    if (checked) {
+      setItemToDelete([...itemToDelete, value]);
+    } else {
+      setItemToDelete(itemToDelete.filter((_id) => _id !== value));
+      setCheckState(false);
+    }
 
-    checked
-      ? setItemToDelete([...itemToDelete, value])
-      : setItemToDelete(itemToDelete.filter((_id) => _id !== value));
     // filter condition return the result when the given condition matches
     // in this filter function the return data is the data which doesnot statisfy the result
   };
@@ -20,20 +31,41 @@ export const CustomTable = ({ transaction }) => {
 
   const handleOnAllSelect = (e) => {
     const checked = e.target.checked;
-    checked
-      ? setItemToDelete(transaction.map(({ _id }) => _id))
-      : setItemToDelete([]);
+
+    if (checked) {
+      setItemToDelete(transaction.map(({ _id }) => _id));
+      setCheckState(true);
+    } else {
+      setItemToDelete([]);
+      setCheckState(false);
+    }
   };
+
   const totalExpense = transaction.reduce(
     (acc, { type, amount }) =>
       type === "income" ? acc + +amount : acc - +amount,
     0
   );
 
+  const checkTotalExpense = (totalExpense) => {
+    if (Math.sign(totalExpense) === 1) {
+      console.log("positive");
+      setBg("success");
+    } else {
+      console.log("negative");
+      setBg("danger");
+    }
+  };
+
   const hadleOnDelete = async () => {
     if (window.confirm(`Are you sure you want to delete`)) {
-      const result = await deleteTransaction(itemToDelete);
-      console.log(result);
+      const { status, message } = await deleteTransaction(itemToDelete);
+      toast[status](message);
+      if (status === "success") {
+        fetchingTransaction();
+        setItemToDelete([]);
+        checkTotalExpense();
+      }
     }
     // if (
     //   window.confirm(
@@ -53,7 +85,8 @@ export const CustomTable = ({ transaction }) => {
               <Form.Check
                 type="checkbox"
                 onChange={handleOnAllSelect}
-                checked={transaction.length === itemToDelete.length}
+                checked={checkState}
+                // checked={transaction.length === itemToDelete.length}
               />
             </th>
 
@@ -72,7 +105,8 @@ export const CustomTable = ({ transaction }) => {
                   type="checkbox"
                   onChange={handleOnSelect}
                   value={item._id}
-                  // makes the checked state true
+                  //   makes the checked state true
+                  //   checked={checkState}
                   checked={itemToDelete.includes(item._id)}
                 />
               </td>
@@ -96,7 +130,10 @@ export const CustomTable = ({ transaction }) => {
 
           <tr>
             <td colSpan={3}>Total Balance</td>
-            <td>${totalExpense}</td>
+            {}
+            <td className="text-center" colSpan={2}>
+              ${totalExpense}
+            </td>
           </tr>
         </tbody>
       </Table>

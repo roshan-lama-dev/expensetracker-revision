@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { MainLayout } from "../components/mainLayout/MainLayout";
 import Container from "react-bootstrap/esm/Container";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import { CustomField } from "../components/mainLayout/customField/CustomField";
 import { Link } from "react-router-dom";
 import { getUser } from "../helpers/axiosHelper";
@@ -58,29 +58,28 @@ const Login = () => {
   return (
     <MainLayout>
       <Container className="mt-5">
-        <div className="row">
-          <div className="col bg-success text-center text-light p-5 m-1 d-xs">
+        <Row>
+          <Col className="col bg-success text-center text-light p-5 m-1 d-flex direction-column justify-content-center align-items-center d-xs">
             <h3> Welcome back to the Expenses Tracker System</h3>
-            <p className="mt-5">Please enter your credentials to login</p>
-          </div>
-          <div className="col m-1">
+          </Col>
+          <Col className="col m-1">
             <Form onSubmit={handleOnSubmit}>
               {fields.map((item, index) => (
                 <CustomField {...item} key={index} />
               ))}
+
               <div className="d-grid">
                 {" "}
                 <Button variant="success" type="submit">
                   LOGIN
                 </Button>
               </div>
-
-              <div className="text-end">
+              <div className="text-end md">
                 <Link to="/register">Don't have an account?</Link>
               </div>
             </Form>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Container>
     </MainLayout>
   );

@@ -11,7 +11,9 @@ const initalState = {
   type: "",
   amount: "",
 };
-export const CustomForm = () => {
+
+// why do we need to destructure the props
+export const CustomForm = ({ fetchingTransaction, checkTotalExpense }) => {
   const [loginUser, setLoginUser] = useState(initalState);
   useEffect(() => {
     const getUser = sessionStorage.getItem("user");
@@ -31,6 +33,13 @@ export const CustomForm = () => {
 
     // console.log(result);
     toast[status](message);
+
+    console.log(status);
+    if (status === "success") {
+      fetchingTransaction();
+      setTransaction(initalState);
+    }
+    checkTotalExpense();
   };
 
   const handleOnChange = (e) => {

@@ -85,9 +85,12 @@ const Register = () => {
   return (
     <MainLayout>
       <Container>
-        <Row className="mt-5">
+        <Row className="mt-5 p-3">
           <Col className="bg-success text-center text-light p-5">
             <h1>Welcome to Expense Tracker</h1>
+            <p className="mt-5">
+              Please register with your details to use the expense tracker app
+            </p>
           </Col>
           <Col className="p-5">
             {" "}
