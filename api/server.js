@@ -1,12 +1,26 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import { connectMongo } from "./src/config/dbConfig.js";
-const app = express();
-const PORT = process.env.PORT || 8000;
+
 import cors from "cors";
 import morgan from "morgan";
 import userRouter from "./src/routers/userRouter.js";
 import transactionRouter from "./src/routers/transactionRouter.js";
 import { userAuth } from "./src/middleware/authMiddleware.js";
+import path from "path";
+
+const app = express();
+const PORT = process.env.PORT || 8000;
+// console.log(process.env.MONGO_CLIENT);
+const __dirname = path.resolve();
+// console.log("form the path", __dirname);
+
+app.get("/dashboard", (req, res) => {
+  res.redirect("/");
+});
+
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 // importing middleware
 app.use(express.json());
@@ -21,6 +35,9 @@ app.use("/api/v1/user", userRouter);
 
 app.use("/api/v1/transaction", userAuth, transactionRouter);
 
+app.use("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/build/index.html"));
+});
 // catch the bad url
 app.use("*", (req, res, next) => {
   // create an object that holds the status and message that could be forwarded to the next function
