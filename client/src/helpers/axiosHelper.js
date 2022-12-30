@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:8000/api/v1";
+// const baseUrl = "http://localhost:8000/api/v1";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "/api/v1"
+    : "http://localhost:8000/api/v1";
+
 const userApi = baseUrl + "/user";
 const transactionApi = baseUrl + "/transaction";
 // user api =============
@@ -25,7 +30,7 @@ export const postUser = async (obj) => {
 export const getUser = async (obj) => {
   try {
     const { data } = await axios.post(userApi + "/login", obj);
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return {
@@ -59,7 +64,7 @@ export const fetchTransaction = async () => {
         Authorization: userId,
       },
     });
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return {
@@ -83,7 +88,7 @@ export const postTransction = async (formdata) => {
         Authorization: userId,
       },
     });
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return {
@@ -108,7 +113,7 @@ export const deleteTransaction = async (ids) => {
         Authorization: userId,
       },
     });
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     return {

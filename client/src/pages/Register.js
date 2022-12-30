@@ -72,7 +72,7 @@ const Register = () => {
     // check if there is value and check whether the value can be downcastedh
     if (value && (name === "pin" || name === "confirmPin")) {
       if (!+value) {
-        console.log(value);
+        // console.log(value);
         toast.error("The PIN must be number");
       }
     }

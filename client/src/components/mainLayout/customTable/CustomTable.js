@@ -27,7 +27,7 @@ export const CustomTable = ({ transaction, fetchingTransaction }) => {
     // filter condition return the result when the given condition matches
     // in this filter function the return data is the data which doesnot statisfy the result
   };
-  console.log(itemToDelete);
+  //   console.log(itemToDelete);
 
   const handleOnAllSelect = (e) => {
     const checked = e.target.checked;
@@ -49,10 +49,10 @@ export const CustomTable = ({ transaction, fetchingTransaction }) => {
 
   const checkTotalExpense = (totalExpense) => {
     if (Math.sign(totalExpense) === 1) {
-      console.log("positive");
+      //   console.log("positive");
       setBg("success");
     } else {
-      console.log("negative");
+      //   console.log("negative");
       setBg("danger");
     }
   };
@@ -89,7 +89,6 @@ export const CustomTable = ({ transaction, fetchingTransaction }) => {
                 // checked={transaction.length === itemToDelete.length}
               />
             </th>
-
             <th>S.N</th>
             <th>Name</th>
             <th>Income</th>
@@ -112,7 +111,6 @@ export const CustomTable = ({ transaction, fetchingTransaction }) => {
               </td>
               <td>{index + 1}</td>
               <td>{item.name}</td>
-
               {item.type === "income" ? (
                 <>
                   {" "}
@@ -127,7 +125,6 @@ export const CustomTable = ({ transaction, fetchingTransaction }) => {
               )}
             </tr>
           ))}
-
           <tr>
             <td colSpan={3}>Total Balance</td>
             {}

@@ -50,13 +50,13 @@ export const CustomForm = ({ fetchingTransaction, checkTotalExpense }) => {
       [name]: value,
     });
 
-    console.log(tarnsaction);
+    // console.log(tarnsaction);
   };
 
   return (
     <Form onSubmit={handleOnSubmit}>
       <Row className="gap-3">
-        <Col md gap-2>
+        <Col className="md gap-2">
           <Form.Select
             onChange={handleOnChange}
             name="type"

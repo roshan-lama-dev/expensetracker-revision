@@ -13,7 +13,7 @@ const Login = () => {
   const emailRef = useRef("");
   const pinRef = useRef("");
   const navigate = useNavigate();
-  let resilt = "";
+  // let resilt = "";
   //WE GET the login details only after the submit button is clicked
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const Login = () => {
       sessionStorage.setItem("user", JSON.stringify(result));
       navigate("/dashboard");
     }
-    resilt = sessionStorage.getItem("user");
+    // resilt = sessionStorage.getItem("user");
   };
 
   const fields = [
